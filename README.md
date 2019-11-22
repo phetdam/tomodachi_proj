@@ -19,20 +19,20 @@ All the data used in this project are saved in .csv files in the `./data` direct
 
 * **./data/X_full.csv**
 
-The original full preprocessed data set, containing the entire 26 columns of features. Split this data into your own training and test data and for performing your own feature engineering, cross validation, resampling, etc. on.
+    The original full preprocessed data set, containing the entire 26 columns of features. Split this data into your own training and test data and for performing your own feature engineering, cross validation, resampling, etc. on.
 
 * **./data/X_train.csv**
 
-The original preprocessed training data split from the full 26-column feature matrix `X_full.csv`.
+    The original preprocessed training data split from the full 26-column feature matrix `X_full.csv`.
 
 * **./data/X_test.csv**
 
-The original preprocessed test data split from the full 26-column feature matrix.
+    The original preprocessed test data split from the full 26-column feature matrix.
 
 * **./data/Xm_train.csv**
 
-Preprocessed, resampled, reduced feature training data with only the 9 continuous features.
+    Preprocessed, resampled, reduced feature training data with only the 9 continuous features.
 
 * **./data/Xm_test.csv**
 
-Preprocessed reduced feature test data that is the test partition complementing `./dataXm_train.csv`.  9 columns of data.
+    Preprocessed reduced feature test data that is the test partition complementing `./dataXm_train.csv`.  9 columns.
