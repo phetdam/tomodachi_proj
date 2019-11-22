@@ -57,3 +57,14 @@ All the data used in this project are saved in .csv files in the `./data` direct
 
 The various pickle files of the models/their wrapper objects can be found here. Descriptions contain instructions for accessing certain fields and properties that may be useful or desirable.
 
+* **dtc_rfecv.pickle**
+
+    Pickle of the `RFECV` object containing a `DecisionTreeClassifier` as the `estimator_` used to greedily select features with cross validation on the training set data in `X_train.csv`. A useful attribute of the object besides the model accessed from `estimator_` is the `support_` attribute, a boolean mask of the selected features from the columns of `X_train.csv`.
+
+* **dtc_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing a `DecisionTreeClassifier` as the estimator used, fit on the reduced feature data from `Xm_train.csv`, **not** the full feature data from `X_train.csv`. Useful attributes are `cv_results_` for the full set of cross validation metrics. Can retrieve the best fitting estimator across all CV folds by through `best_estimator_`, its cross validation score through `best_score_`, and the mean cross validation scores through `cv_results_["mean_test_score"]`.
+
+* **ada_stump_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier1 as the estimator, with `DecisionTreeClassifier(max_depth = 1)` as the base estimator (a tree stump), fit on the reduced feature data from `Xm_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object.
