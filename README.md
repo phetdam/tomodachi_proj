@@ -63,8 +63,20 @@ The various pickle files of the models/their wrapper objects can be found here. 
 
 * **dtc_gscv.pickle**
 
-    Pickle of the `GridSearchCV` object containing a `DecisionTreeClassifier` as the estimator used, fit on the reduced feature data from `Xm_train.csv`, **not** the full feature data from `X_train.csv`. Useful attributes are `cv_results_` for the full set of cross validation metrics. Can retrieve the best fitting estimator across all CV folds by through `best_estimator_`, its cross validation score through `best_score_`, and the mean cross validation scores through `cv_results_["mean_test_score"]`, which I like to call `.mean()` on.
+    Pickle of the `GridSearchCV` object containing a `DecisionTreeClassifier` as the estimator used, fit on the resampled reduced feature data from `Xm_train.csv`, **not** the full feature data from `X_train.csv`. Useful attributes are `cv_results_` for the full set of cross validation metrics. Can retrieve the best fitting estimator across all CV folds by through `best_estimator_`, its cross validation score through `best_score_`, and the mean cross validation scores through `cv_results_["mean_test_score"]`, which I like to call `.mean()` on.
 
 * **ada_stump_gscv.pickle**
 
-    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with `DecisionTreeClassifier(max_depth = 1)` as the base estimator (a tree stump), fit on the reduced feature data from `Xm_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object.
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with `DecisionTreeClassifier(max_depth = 1)` as the base estimator (a tree stump), fit on the resampled reduced feature data from `Xm_train.csv`. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object. Can retrieve the base estimators through the `estimators_` property of the `AdaBoostClassifier`.
+
+* **ada_tuned_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a full `DecisionTreeClassifier` as the base estimator, fit on the resampled reduced feature data from `Xm_train.csv`. Contains 50 trees. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.
+
+* **ada_ext_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a full `DecisionTreeClassifier` as the base estimator, fit on the resampled reduced feature data from `Xm_train.csv`. Contains 150 trees. Refer to above for useful attributes of the `GridSearchCV` object and how to for retrieve the base estimators.
+
+* **ada_fstump_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from `X_train.csv`. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.
