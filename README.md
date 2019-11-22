@@ -52,3 +52,8 @@ All the data used in this project are saved in .csv files in the `./data` direct
 * **./data/ym_train.csv**
 
     The response vector to go along with the reduced feature test data `./data/Xm_test.csv`.
+
+## Pickles
+
+The various pickle files of the models/their wrapper objects can be found here. Descriptions contain instructions for accessing certain fields and properties that may be useful or desirable.
+
