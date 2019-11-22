@@ -77,6 +77,6 @@ The various pickle files of the models/their wrapper objects can be found here. 
 
     Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a full `DecisionTreeClassifier` as the base estimator, fit on the resampled reduced feature data from `Xm_train.csv`. Contains 150 trees. Refer to above for useful attributes of the `GridSearchCV` object and how to for retrieve the base estimators.
 
-* **ada_fstump_gscv.pickle**
+* **ada_fstump_gscv.pickle.zip**
 
-    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from `X_train.csv`. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.
+    Zipped pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from `X_train.csv`. True file size is over the 100 MB Git file size limit. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.
