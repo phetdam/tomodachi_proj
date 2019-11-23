@@ -13,7 +13,7 @@ __Remark.__ This repository is a work of progress, so expect frequent changes.
 
 Contributors: Derek Huang, TBA
 
-## Data Files
+## Data files
 
 All the data used in this project are saved in .csv files in the `./data` directory. Descriptions below.
 
@@ -79,4 +79,12 @@ The various pickle files of the models/their wrapper objects can be found here. 
 
 * **ada_fstump_gscv.pickle**
 
-    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from `X_train.csv`. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from `X_train.csv`. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.'
+
+* **ada_ftuned_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a full `DecisionTreeClassifier`as the base estimator, fit on the full feature data from `X_train.csv`. Contains 50 trees. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.'
+
+## Figures
+
+Various figures displaying model statistics for a single or multiple models. WIP
