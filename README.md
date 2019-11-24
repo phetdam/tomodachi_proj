@@ -79,11 +79,11 @@ The various pickle files of the models/their wrapper objects can be found here. 
 
 * **ada_fstump_gscv.pickle**
 
-    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from `X_train.csv`. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.'
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from `X_train.csv`. Contains 80 stumps. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.
 
 * **ada_ftuned_gscv.pickle**
 
-    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a full `DecisionTreeClassifier`as the base estimator, fit on the full feature data from `X_train.csv`. Contains 50 trees. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.'
+    Pickle of the `GridSearchCV` object containing an `AdaBoostClassifier` as the estimator, with a full `DecisionTreeClassifier`as the base estimator, fit on the full feature data from `X_train.csv`. Contains 50 trees. Refer to above for useful attributes of the `GridSearchCV` object and for how to retrieve the base estimators.
 
 ## Figures
 
