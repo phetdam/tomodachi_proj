@@ -121,11 +121,14 @@ def multiclass_stats(mce, X_test, y_test, model_name = "auto",
                  importances or model coefficients, depending on the model. if
                  either feature_importances_ or coef_ cannot be found, the
                  function will print an error and terminate.
-    figsize      optional, default "auto". will allocate 4.2666 inches in width
-                 and 4 inches in height if > 2 subplots (feature_ws is True) or
-                 only 4 inches in width and height if 2 subplots. for more than
-                 2 subplots when feature_ws is True, there will be 3 subplots
-                 per row, with multiple rows as necessary.
+    figsize      optional, default "auto". will allocate only 4 inches in width
+                 and height if 2 subplots (feature_ws == False). for 3 subplots
+                 4.2666 inches width and 4 inches for each plot, while for more
+                 than 3 subplots, 4.65 inches width and 4 inches for each plot;
+                 both these cases are when feature_ws == True. for more than
+                 3 total plots, there will be 3 plots per row, with multiple
+                 rows as necessary. we need to vary the widths because the
+                 tight_layout() makes different adjustments in each case.
     verbose      optional, default False. if True, prints some error messages.
     best_model   optional, default False. whether or not to include "best"
                  before the name of the model in the subplot titles for the
