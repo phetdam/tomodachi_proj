@@ -95,4 +95,4 @@ The various pickle files of the models/their wrapper objects can be found here. 
 
 ## Figures
 
-Various figures displaying model statistics for a single or multiple models. WIP
+The figures in the `./figures` directory mostly display model statistics for a single model, namely the confusion matrix, ROC curve, and feature importances (for trees) or coefficients (for linear models). The file name of each model-related figure has the form model_gscv_stats.png`, and as implied, each corresponds to a pickle `model_gscv.pickle`.
