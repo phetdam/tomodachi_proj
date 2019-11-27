@@ -29,6 +29,10 @@ fig, cmat, stats_dict = multiclass_stats(cf, X_test, y_test, best_model = True,
 """
 # Changelog:
 #
+# 11-27-2019
+#
+# added short main to warn if user tries to run module as script.
+#
 # 11-26-2019
 #
 # added proper support for the coef_ attribute, for both the two-class and the
@@ -304,3 +308,8 @@ def multiclass_stats(mce, X_test, y_test, model_name = "auto",
     if no_return == True: return None
     # else return figure, confusion matrix cmat, and statistics in stats_dict
     return fig, cmat, stats_dict
+
+# main
+if __name__ == "__main__":
+    print("{0}: do not run module as script. refer to docstring for usage."
+          "".format(multiclass_stats.__name__), file = stderr)
