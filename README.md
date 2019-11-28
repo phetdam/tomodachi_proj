@@ -2,7 +2,7 @@
 
 ![./banner.png](./banner.png)
 
-_last updated: 11-27-2019_  
+_last updated: 11-28-2019_  
 _file created: 10-22-2019_
 
 Was originally the working project folder for BAC Insight Team's project on crime in Chicago, but due to some issues with the data set, we have changed our project to using panel data on songs extracted from the Spotify API to predict a song's danceability. Our goal is to see which features are relevant for predicting danceability, and to create models that could be used to recommend automatically construct a playlist of Spotify songs to dance to at the club or other venue.
@@ -87,11 +87,19 @@ The pickles of the `GridSearchCV` objects containing different base models can b
 
 * **flr_gscv.pickle**
 
-    Pickle of the `GridSearchCV` object containing a `LogisticRegression` model as the estimato, fit on the full feature data from `X_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object. Can retrieve model coefficients from the estimator through the `coef_` attribute, which takes varying shape: the shape is `(1, n_features)` if the problem is a two-class problem, while the shahpe is `(n_classes, n_features)` if the problem is a multi-class problem.
+    Pickle of the `GridSearchCV` object containing a `LogisticRegression` model as the estimator, fit on the full feature data from `X_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object. Can retrieve model coefficients from the estimator through the `coef_` attribute, which takes varying shape: the shape is `(1, n_features)` if the problem is a two-class problem, while the shahpe is `(n_classes, n_features)` if the problem is a multi-class problem.
 
 * **lr_gscv.pickle**
 
-    Pickle of the `GridSearchCV` object containing a `LogisticRegression` model as the estimato, fit on the resampled, reduced feature data from `Xm_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object. Can retrieve model coefficients from the estimator through the `coef_` attribute; see above for shape.
+    Pickle of the `GridSearchCV` object containing a `LogisticRegression` model as the estimator, fit on the resampled, reduced feature data from `Xm_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object. Can retrieve model coefficients from the estimator through the `coef_` attribute; see above for shape.
+
+* **fsgd_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing a `SGDClassifier` model as the estimator, fit on the full feature data from `X_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object. Can retrieve model coefficients from the estimator through the `coef_` attribute; see above for shape.
+
+* **sgd_gscv.pickle**
+
+    Pickle of the `GridSearchCV` object containing a `SGDClassifier` model as the estimator, fit on the resampled, reduced feature data from `Xm_train.csv`. Refer to above for useful attributes of the `GridSearchCV` object. Can retrieve model coefficients from the estimator through the `coef_` attribute; see above for shape.
 
 ## Figures
 
