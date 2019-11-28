@@ -2,7 +2,7 @@
 
 ![./banner.png](./banner.png)
 
-_last updated: 11-26-2019_  
+_last updated: 11-27-2019_  
 _file created: 10-22-2019_
 
 Was originally the working project folder for BAC Insight Team's project on crime in Chicago, but due to some issues with the data set, we have changed our project to using panel data on songs extracted from the Spotify API to predict a song's danceability. Our goal is to see which features are relevant for predicting danceability, and to create models that could be used to recommend automatically construct a playlist of Spotify songs to dance to at the club or other venue.
@@ -53,9 +53,9 @@ All the data used in this project are saved in .csv files in the `./data` direct
 
     The response vector to go along with the reduced feature test data `./data/Xm_test.csv`.
 
-## Pickles
+## Models
 
-The various pickle files of the models/their wrapper objects can be found here. Descriptions contain instructions for accessing certain fields and properties that may be useful or desirable.
+The pickles of the `GridSearchCV` objects containing different base models can be found in `./models`. Descriptions contain instructions for accessing certain fields and properties that may be useful or desirable.
 
 * **dtc_rfecv.pickle**
 
