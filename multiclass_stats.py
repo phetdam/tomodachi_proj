@@ -29,6 +29,10 @@ fig, cmat, stats_dict = multiclass_stats(cf, X_test, y_test, best_model = True,
 """
 # Changelog:
 #
+# 11-30-2019
+#
+# modified initial argument type checking since there is erroneous fall-through.
+#
 # 11-27-2019
 #
 # added short main to warn if user tries to run module as script.
@@ -160,6 +164,7 @@ def multiclass_stats(mce, X_test, y_test, model_name = "auto",
     if isinstance(mce, ClassifierMixin) == False:
         print("{0}: must pass in classifier inheriting from sklearn.base."
               "ClassifierMixin".format(fname_), file = sys.stderr)
+        raise SystemExit(1)
     # check the length of X_test and y_test are the same
     if len(X_test) != len(y_test):
         print("{0}: X_test and y_test must have same umber of observations"
