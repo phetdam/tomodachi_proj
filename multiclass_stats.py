@@ -32,6 +32,7 @@ fig, cmat, stats_dict = multiclass_stats(cf, X_test, y_test, best_model = True,
 # 11-30-2019
 #
 # modified initial argument type checking since there is erroneous fall-through.
+# changed to raise appropriate exceptions for each instance.
 #
 # 11-27-2019
 #
@@ -162,13 +163,12 @@ def multiclass_stats(mce, X_test, y_test, model_name = "auto",
     fname_ = multiclass_stats.__name__
     # check that the estiamator mce is a classifier. if not, print error
     if isinstance(mce, ClassifierMixin) == False:
-        print("{0}: must pass in classifier inheriting from sklearn.base."
-              "ClassifierMixin".format(fname_), file = sys.stderr)
-        raise SystemExit(1)
+        raise TypeError("{0}: must pass in classifier inheriting from "
+                        "sklearn.base.ClassifierMixin".format(fname_))
     # check the length of X_test and y_test are the same
     if len(X_test) != len(y_test):
-        print("{0}: X_test and y_test must have same umber of observations"
-              "".format(fname_), file = sys.stderr)
+        raise IndexError("{0}: X_test and y_test must have same number of "
+                         "observations".format(fname_))
     # dictionary of statistics
     stats_dict = {}
     # compute confusion matrix
