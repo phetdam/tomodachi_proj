@@ -44,6 +44,10 @@ df_new = pair_nlfe(df, poly1 = df.columns, lnquad = df.columns)
 #
 # finished adding code for verbose option in pair_nlfe. also added examples for
 # nlfe and pair_nlfe, and added some warnings on memory allocation errors.
+# rewrote the computational parts for mquad and lnquad to use vectorized numpy
+# operations since i think my attempt at using map() is incorrect.
+#
+# observation: somehow, using map() gave me NaN values? what???
 #
 # 12-01-2019
 #
@@ -82,6 +86,8 @@ _MODULE_NAME = "autofe"
 # very strict on what can be passed
 from pandas import Series, DataFrame, Index
 from numpy import power, exp, sqrt
+# import numpy log by as different name to distinguish from python log
+from numpy import log as nplog
 # we use the python math log since the numpy log does not throw ValueError
 from math import log
 from sys import stderr
@@ -227,9 +233,8 @@ def nlfe(data, verbose = False, poly2 = None, poly3 = None, mquad = None,
         _check_dfcols(data, mquad, _fname, "mquad")
         # for each column name specified in mquad, compute new multiquadratic
         # feature and assign new column names for mquad_cols
-        mquad_cols = DataFrame(map(lambda x: sqrt(1 + power(x, 2)),
-                                   data[mquad].values),
-                               columns = [col + "_mq" for col in mquad])
+        mquad_cols = sqrt(1 + power(data[mquad], 2))
+        mquad_cols.columns = [col + "_mq" for col in mquad]
         # merge with new_cols if not None, else assign
         if new_cols is None: new_cols = mquad_cols
         else: new_cols = new_cols.join(mquad_cols)
@@ -292,10 +297,8 @@ def nlfe(data, verbose = False, poly2 = None, poly3 = None, mquad = None,
         _check_dfcols(data, lnquad, _fname, "lnquad")
         # for each column name specified in lnquad, compute new feature and
         # assign new column names for lnquad_cols
-        lnquad_cols = DataFrame(map(lambda x:
-                                    map(lambda y: log(1 + power(y, 2)), x),
-                                    data[lnquad].values),
-                                columns = [col + "_lnq" for col in lnquad])
+        lnquad_cols = nplog(1 + power(data[lnquad], 2))
+        lnquad_cols.columns = [col + "_lnq" for col in lnquad]
         # merge with new_cols if not None, else assign
         if new_cols is None: new_cols = lnquad_cols
         else: new_cols = new_cols.join(lnquad_cols)
@@ -496,10 +499,8 @@ def pair_nlfe(data, verbose = False, poly1 = None, poly2 = None, poly3 = None,
         mquad_cols = _pairprods(data, mquad, _fname, "mquad")
         # for each column name specified in mquad, compute new polynomial
         # feature and assign new column names for mquad_cols
-        mquad_cols = DataFrame(map(lambda x: sqrt(1 + power(x, 2)),
-                                   mquad_cols.values),
-                               columns = [col + "_mq" for col in
-                                          mquad_cols.columns])
+        mquad_cols = sqrt(1 + power(mquad_cols, 2))
+        mquad_cols.columns = [col + "_mq" for col in mquad_cols.columns]
         # merge with pair_cols if not None, else assign
         if pair_cols is None: pair_cols = mquad_cols
         else: pair_cols = pair_cols.join(mquad_cols)
@@ -581,10 +582,8 @@ def pair_nlfe(data, verbose = False, poly1 = None, poly2 = None, poly3 = None,
         lnquad_cols = _pairprods(data, lnquad, _fname, "lnquad")
         # for each column name specified in lnquad, compute new polynomial
         # feature and assign new column names for lnquad_cols
-        lnquad_cols = DataFrame(map(lambda x: sqrt(1 + power(x, 2)),
-                                   lnquad_cols.values),
-                               columns = [col + "_lnq" for col in
-                                          lnquad_cols.columns])
+        lnquad_cols = sqrt(1 + power(lnquad_cols, 2))
+        lnquad_cols.columns = [col + "_lnq" for col in lnquad_cols.columns]
         # merge with pair_cols if not None, else assign
         if pair_cols is None: pair_cols = lnquad_cols
         else: pair_cols = pair_cols.join(lnquad_cols)
