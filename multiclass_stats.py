@@ -29,6 +29,13 @@ fig, cmat, stats_dict = multiclass_stats(cf, X_test, y_test, best_model = True,
 """
 # Changelog:
 #
+# 12-12-2019
+#
+# according to the file history, i made this change 12-04 but never wrote it
+# down in the change log nor pushed it to the repository. corrected unbound
+# local error that one might get due to referencing of the wrong color palette
+# variable when calculating feature importances.
+#
 # 11-30-2019
 #
 # modified initial argument type checking since there is erroneous fall-through.
@@ -277,7 +284,7 @@ def multiclass_stats(mce, X_test, y_test, model_name = "auto",
     # create line plot
     sns.lineplot(fpr, tpr, color = roc_color, ax = axs[1])
     # if feature_ws is True, then also display feature importances/coefficients
-    # based on whatever is first found to be true
+    # based on whatever is first found to be true. first get color palette
     # if coefs is not None, then plot coefficients of the model (harder)
     if coefs is not None:
         # will use same color palette, specified by palette argument, with
@@ -303,7 +310,7 @@ def multiclass_stats(mce, X_test, y_test, model_name = "auto",
     elif feature_imps is not None:
         axs[2].set_title("feature importances, {0}".format(model_name))
         sns.barplot(data = DataFrame([feature_imps], columns = X_test.columns),
-                    palette = colors, ax = axs[2], orient = "h")
+                    palette = palette, ax = axs[2], orient = "h")
     # if both are None, do nothing; feature_ws is probably False
     # adjust figure for tightness
     fig.tight_layout()
