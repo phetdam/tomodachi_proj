@@ -2,14 +2,14 @@
 
 ![./banner.png](./banner.png)
 
-_last updated: 11-28-2019_  
+_last updated: 01-31-2020_  
 _file created: 10-22-2019_
 
 Was originally the working project folder for BAC Insight Team's project on crime in Chicago, but due to some issues with the data set, we have changed our project to using panel data on songs extracted from the Spotify API to predict a song's danceability. Our goal is to see which features are relevant for predicting danceability, and to create models that could be used to recommend automatically construct a playlist of Spotify songs to dance to at the club or other venue.
 
 You may find the original data [here](https://www.kaggle.com/snapcrack/the-billboard-200-acoustic-data) on [Kaggle](https://www.kaggle.com/), or use the extracted .csv files in the `./data` directory. Stay tuned for more.
 
-__Remark.__ This repository is a work of progress, so expect frequent changes.  
+__Remark.__ **IMPORTANT:** The pickled models in the `./models` directory were created under 32-bit Python 3.7.4, so the tree-based models **cannot** be unpickled under 64-bit Python. This is an issue dating from 2014 that has never been resolved; see details on StackOverflow [here](https://stackoverflow.com/questions/21033038/scikits-learn-randomforrest-trained-on-64bit-python-wont-open-on-32bit-python).
 
 Contributors: Derek Huang, TBA
 
