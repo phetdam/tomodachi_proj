@@ -38,89 +38,135 @@ Data files
 All the data used in this project are saved in .csv files in the ``./data``
 directory. Descriptions below.
 
-./data/X_full.csv
-   The original full preprocessed data set, containing the entire 26 columns of features. Split this data into your own training and test data and for performing your own feature engineering, cross validation, resampling, etc. on.
+``./data/X_full.csv``
+   The original full preprocessed data set, containing the entire 26 columns of
+   features. Split this data into your own training and test data and for
+   performing your own feature engineering, cross validation, resampling, etc.
 
-* **./data/X_train.csv**
+``./data/X_train.csv``
+   The original preprocessed training data split from the full 26-column
+   feature matrix ``X_full.csv``.
 
-    The original preprocessed training data split from the full 26-column feature matrix ``X_full.csv``.
+``./data/y_train.csv``
+   Response vector for the train data from the full feature matrix.
 
-* **./data/y_train.csv**
+``./data/X_test.csv``
+   Original preprocessed test data split from the full 26-column feature matrix.
 
-    The response vector to go along with the train data from the full feature matrix.
+``./data/y_test.csv``
+   Rresponse vector for the test data from the full feature matrix.
 
-* **./data/X_test.csv**
+``./data/Xm_train.csv``
+   Preprocessed, resampled, reduced feature training data with only the 9
+   continuous features.
 
-    The original preprocessed test data split from the full 26-column feature matrix.
+``./data/ym_train.csv``
+   Response vector for the reduced feature, resampled test data.
 
-* **./data/y_test.csv**
+``./data/Xm_test.csv``
+   Preprocessed reduced feature test data that is the test partition
+   complementing ``./data/Xm_train.csv``.  9 columns.
 
-    The response vector to go along with the test data from the full feature matrix.
+``./data/ym_train.csv``
+   Response vector for the reduced feature test data ``./data/Xm_test.csv``.
 
-* **./data/Xm_train.csv**
+Models
+------
 
-    Preprocessed, resampled, reduced feature training data with only the 9 continuous features.
+The pickles of the ``GridSearchCV`` objects containing different base models
+can be found in ``./models``. Descriptions contain instructions for accessing
+certain fields and properties that may be useful or desirable.
 
-* **./data/ym_train.csv**
+``dtc_rfecv.pickle``
+   Pickle of the ``RFECV`` object containing a ``DecisionTreeClassifier`` as
+   the ``estimator_`` used to greedily select features with cross validation on
+   the training set data in ``X_train.csv``. A useful attribute besides the
+   model accessed from ``estimator_`` is the ``support_`` attribute, a boolean
+   mask of the selected features from the columns of ``X_train.csv``.
 
-    The response vector to go along with the reduced feature, resampled test data.
+``dtc_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing a ``DecisionTreeClassifier``
+   as the estimator used, fit on the resampled reduced feature data from
+   ``Xm_train.csv``, **not** the full feature data from ``X_train.csv``. Useful
+   attributes are ``cv_results_`` for the full set of cross validation metrics.
+   Can retrieve the best fitting estimator across all CV folds by through
+   ``best_estimator_``, its cross validation score through ``best_score_``, and
+   the mean cross validation scores through ``cv_results_["mean_test_score"]``,
+   which I like to call ``.mean()`` on.
 
-* **./data/Xm_test.csv**
+``ada_stump_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier``
+   as the estimator, with ``DecisionTreeClassifier(max_depth = 1)`` as the base
+   estimator (a tree stump), fit on the resampled reduced feature data from
+   ``Xm_train.csv``. Contains 80 stumps. Refer to above for useful attributes
+   of the ``GridSearchCV`` object. Can retrieve the base estimators through the
+   ``estimators_`` property of the ``AdaBoostClassifier``.
 
-    Preprocessed reduced feature test data that is the test partition complementing ``./data/Xm_train.csv``.  9 columns.
+``ada_tuned_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier``
+   as the estimator, with a full ``DecisionTreeClassifier`` as the base
+   estimator, fit on the resampled reduced feature data from ``Xm_train.csv``.
+   Contains 50 trees. Refer to above for useful attributes of the
+   ``GridSearchCV`` object and for how to retrieve the base estimators.
 
-* **./data/ym_train.csv**
+``ada_ext_gscv.pickle.zip``
+   Zipped pickle of the ``GridSearchCV`` object containing an
+   ``AdaBoostClassifier`` as the estimator, with a full
+   ``DecisionTreeClassifier`` as the base estimator, fit on the resampled
+   reduced feature data from ``Xm_train.csv``. Contains 150 trees; zipped as
+   the file size is over the 100 MB Git limit. Refer to above for useful
+   attributes of the ``GridSearchCV`` object and how to for retrieve the base
+   estimators.
 
-    The response vector to go along with the reduced feature test data ``./data/Xm_test.csv``.
+``ada_fstump_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier``
+   as the estimator, with a decision tree stump as the base estimator, fit on
+   the full feature data from ``X_train.csv``. Contains 80 stumps. Refer to
+   above for useful attributes of the ``GridSearchCV`` object and for how to
+   retrieve the base estimators.
 
-## Models
+``ada_ftuned_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier``
+   as the estimator, with a full ``DecisionTreeClassifier``as the base
+   estimator, fit on the full feature data from ``X_train.csv``. Contains 50
+   trees. Refer to above for useful attributes of the ``GridSearchCV`` object
+   and for how to retrieve the base estimators.
 
-The pickles of the ``GridSearchCV`` objects containing different base models can be found in ``./models``. Descriptions contain instructions for accessing certain fields and properties that may be useful or desirable.
+``flr_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing a ``LogisticRegression``
+   model as the estimator, fit on the full feature data from ``X_train.csv``.
+   Refer to above for useful attributes of the ``GridSearchCV`` object. Can
+   retrieve model coefficients from the estimator through the ``coef_``
+   attribute, which takes varying shape: the shape is ``(1, n_features)`` if
+   the problem is a two-class problem, while the shape is
+   ``(n_classes, n_features)`` if the problem is a multi-class problem.
 
-* **dtc_rfecv.pickle**
+``lr_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing a ``LogisticRegression``
+   model as the estimator, fit on the resampled, reduced feature data from
+   ``Xm_train.csv``. Refer to above for useful attributes of the
+   ``GridSearchCV`` object. Can retrieve model coefficients from the estimator
+   through the ``coef_`` attribute; see above for shape.
 
-    Pickle of the ``RFECV`` object containing a ``DecisionTreeClassifier`` as the ``estimator_`` used to greedily select features with cross validation on the training set data in ``X_train.csv``. A useful attribute besides the model accessed from ``estimator_`` is the ``support_`` attribute, a boolean mask of the selected features from the columns of ``X_train.csv``.
+``fsgd_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing a ``SGDClassifier`` model
+   as the estimator, fit on the full feature data from ``X_train.csv``. Refer
+   to above for useful attributes of the ``GridSearchCV`` object. Can retrieve
+   model coefficients from the estimator through the ``coef_`` attribute; see
+   above for shape.
 
-* **dtc_gscv.pickle**
+``sgd_gscv.pickle``
+   Pickle of the ``GridSearchCV`` object containing a ``SGDClassifier`` model
+   as the estimator, fit on the resampled, reduced feature data from
+   ``Xm_train.csv``. Refer to above for useful attributes of the
+   ``GridSearchCV`` object. Can retrieve model coefficients from the estimator
+   through the ``coef_`` attribute; see above for shape.
 
-    Pickle of the ``GridSearchCV`` object containing a ``DecisionTreeClassifier`` as the estimator used, fit on the resampled reduced feature data from ``Xm_train.csv``, **not** the full feature data from ``X_train.csv``. Useful attributes are ``cv_results_`` for the full set of cross validation metrics. Can retrieve the best fitting estimator across all CV folds by through ``best_estimator_``, its cross validation score through ``best_score_``, and the mean cross validation scores through ``cv_results_["mean_test_score"]``, which I like to call ``.mean()`` on.
+Figures
+-------
 
-* **ada_stump_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier`` as the estimator, with ``DecisionTreeClassifier(max_depth = 1)`` as the base estimator (a tree stump), fit on the resampled reduced feature data from ``Xm_train.csv``. Contains 80 stumps. Refer to above for useful attributes of the ``GridSearchCV`` object. Can retrieve the base estimators through the ``estimators_`` property of the ``AdaBoostClassifier``.
-
-* **ada_tuned_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier`` as the estimator, with a full ``DecisionTreeClassifier`` as the base estimator, fit on the resampled reduced feature data from ``Xm_train.csv``. Contains 50 trees. Refer to above for useful attributes of the ``GridSearchCV`` object and for how to retrieve the base estimators.
-
-* **ada_ext_gscv.pickle.zip**
-
-    Zipped pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier`` as the estimator, with a full ``DecisionTreeClassifier`` as the base estimator, fit on the resampled reduced feature data from ``Xm_train.csv``. Contains 150 trees; zipped as the file size is over the 100 MB Git limit. Refer to above for useful attributes of the ``GridSearchCV`` object and how to for retrieve the base estimators.
-
-* **ada_fstump_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier`` as the estimator, with a decision tree stump as the base estimator, fit on the full feature data from ``X_train.csv``. Contains 80 stumps. Refer to above for useful attributes of the ``GridSearchCV`` object and for how to retrieve the base estimators.
-
-* **ada_ftuned_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing an ``AdaBoostClassifier`` as the estimator, with a full ``DecisionTreeClassifier``as the base estimator, fit on the full feature data from ``X_train.csv``. Contains 50 trees. Refer to above for useful attributes of the ``GridSearchCV`` object and for how to retrieve the base estimators.
-
-* **flr_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing a ``LogisticRegression`` model as the estimator, fit on the full feature data from ``X_train.csv``. Refer to above for useful attributes of the ``GridSearchCV`` object. Can retrieve model coefficients from the estimator through the ``coef_`` attribute, which takes varying shape: the shape is ``(1, n_features)`` if the problem is a two-class problem, while the shahpe is ``(n_classes, n_features)`` if the problem is a multi-class problem.
-
-* **lr_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing a ``LogisticRegression`` model as the estimator, fit on the resampled, reduced feature data from ``Xm_train.csv``. Refer to above for useful attributes of the ``GridSearchCV`` object. Can retrieve model coefficients from the estimator through the ``coef_`` attribute; see above for shape.
-
-* **fsgd_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing a ``SGDClassifier`` model as the estimator, fit on the full feature data from ``X_train.csv``. Refer to above for useful attributes of the ``GridSearchCV`` object. Can retrieve model coefficients from the estimator through the ``coef_`` attribute; see above for shape.
-
-* **sgd_gscv.pickle**
-
-    Pickle of the ``GridSearchCV`` object containing a ``SGDClassifier`` model as the estimator, fit on the resampled, reduced feature data from ``Xm_train.csv``. Refer to above for useful attributes of the ``GridSearchCV`` object. Can retrieve model coefficients from the estimator through the ``coef_`` attribute; see above for shape.
-
-## Figures
-
-The figures in the ``./figures`` directory mostly display model statistics for a single model, namely the confusion matrix, ROC curve, and feature importances (for trees) or coefficients (for linear models). The file name of each model-related figure has the form ``model_gscv_stats.png``, and as implied, each corresponds to a pickle ``model_gscv.pickle``.
+The figures in the ``./figures`` directory mostly display model statistics for
+a single model, namely the confusion matrix, ROC curve, and feature importances
+(for trees) or coefficients (for linear models). The file name of each
+model-related figure has the form ``[model_name]_stats.png``, and as implied,
+each corresponds to a pickle ``[model_name].pickle``.
