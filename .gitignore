@@ -1,0 +1,53 @@
+# ignore __pycache__ and jupter notebook autosave dir
+**/__pycache__
+**/.ipynb_checkpoints
+# ignore specific notebooks (are these done?)
+bb200_feature_engineering.ipynb
+bb200_third_impression.ipynb
+random_forest_alex_rudra.ipynb
+random_forest_test.ipynb
+# ignore unused data
+data/Chicago_Crimes_2012_to_2017.csv
+data/Xe_raw.csv
+data/Xe_test.csv
+data/Xe_train.csv
+data/Xfe_test.csv
+data/Xfe_train.csv
+data/billboard_200_acoustic_data.zip
+data/crimes-in-chicago.zip
+data/the-billboard-200-acoustic-data.zip
+data/ye_test.csv
+data/ye_train.csv
+data/yfe_test.csv
+data/yfe_train.csv
+# ignore unused figures
+figures/ada_ext_gscv_stats_large.png
+figures/ada_fext_gscv_stats.png
+figures/ada_fstump_gscv_stats_large.png
+figures/ada_ftuned_gscv_stats_large.png
+figures/ada_mst_gscv_stats.png
+figures/ada_stump_gscv_stats_large.png
+figures/ada_tuned_gscv_stats_large.png
+figures/class_pairplot.png
+figures/dtc_gscv_stats_large.png
+figures/dtc_pairwise_surface.png
+figures/dtc_rfecv_stats_large.png
+figures/edtc_cvscores.png
+figures/edtc_feature_importances.png
+figures/erdtc_cvscores.png
+figures/erdtc_feature_importances.png
+figures/erdtc_rfecv_stats.png
+figures/fdtc_cvscores.png
+figures/feature_importances_comp_large.png
+figures/frfc_gscv_stats.png
+figures/rfc_gscv_stats.png
+# ignore unused model pickles
+models/ada_ext_gscv.pickle
+models/ada_fext_gscv.pickle
+models/ada_mst_gscv.pickle
+models/edtc_rfecv.pickle
+models/erdtc_rfecv.pickle
+models/frfc_gscv.pickle
+models/rfc_gscv.pickle
+# ignore unused scripts
+resampled_cv.py
