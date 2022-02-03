@@ -38,7 +38,7 @@ Data files
 All the data used in this project are saved in .csv files in the ``./data``
 directory. Descriptions below.
 
-``./data/X_full.csv``
+./data/X_full.csv
    The original full preprocessed data set, containing the entire 26 columns of features. Split this data into your own training and test data and for performing your own feature engineering, cross validation, resampling, etc. on.
 
 * **./data/X_train.csv**
